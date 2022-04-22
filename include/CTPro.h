@@ -28,4 +28,11 @@
     #define DIR_LA 10
     #define DIR_RA 8
     #define DIR_RB 6
+
+
+    //Direcciones memoria sensores tof
+    const uint8_t TOF_SENSOR_FRONT  = 0x30;
+    const uint8_t TOF_SENSOR_LEFT = 0x31;
+    const uint8_t TOF_SENSOR_RIGHT = 0x32;
+
 #endif
