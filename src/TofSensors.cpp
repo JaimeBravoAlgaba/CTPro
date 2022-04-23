@@ -14,7 +14,7 @@ void TofSensors::setID(uint8_t adress_front, uint8_t adress_right, uint8_t adres
 {
     //todos reset
     digitalWrite(myXSHUTpins[FRONT], LOW);
-    digitalWrite(myXSHUTpins[RIGHT], LOW);
+    digitalWrite(myXSHUTpins[RIGHT], LOW);                  
     digitalWrite(myXSHUTpins[LEFT], LOW);
     delay(10);
 
@@ -23,11 +23,11 @@ void TofSensors::setID(uint8_t adress_front, uint8_t adress_right, uint8_t adres
     digitalWrite(myXSHUTpins[RIGHT], HIGH);
     digitalWrite(myXSHUTpins[LEFT], HIGH);
     delay(10);
-
+                    
     //activamos front y reset right y left
-    digitalWrite(myXSHUTpins[FRONT], HIGH);
+    digitalWrite(myXSHUTpins[FRONT], HIGH);                  
     digitalWrite(myXSHUTpins[RIGHT], LOW);
-    digitalWrite(myXSHUTpins[LEFT], LOW);
+    digitalWrite(myXSHUTpins[LEFT], LOW);                  
 
 
     Serial.println("xd");

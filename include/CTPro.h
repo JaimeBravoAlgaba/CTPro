@@ -30,15 +30,30 @@
     #define DIR_RB 6
 
 
+    // OLED	
+    #define SCREEN_WIDTH 128 // OLED display width, in pixels
+    #define SCREEN_HEIGHT 64 // OLED display height, in pixels
+    #define SCREEN_ADDRESS 0x3C // OLED I2C address
+    #define OLED_RESET -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+
+
+    // DISTANCIAS
+    #define DISTANCE_FRONT_MIN_MM 200
+    #define DISTANCE_FRONT_MAX_MM 400
+    #define DISTANCE_LEFT_MIN_MM 200
+    #define DISTANCE_LEFT_MAX_MM 400
+    #define DISTANCE_RIGHT_MIN_MM 200
+    #define DISTANCE_RIGHT_MAX_MM 400
+
+
+
+    
     //Direcciones memoria sensores tof
     const uint8_t TOF_SENSOR_FRONT  = 0x30;
     const uint8_t TOF_SENSOR_LEFT = 0x31;
     const uint8_t TOF_SENSOR_RIGHT = 0x32;
 
 
-    #define SCREEN_WIDTH 128 // OLED display width, in pixels
-    #define SCREEN_HEIGHT 64 // OLED display height, in pixels
-    #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
-    #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+    
 
 #endif
