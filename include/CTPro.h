@@ -46,6 +46,26 @@
     #define DISTANCE_RIGHT_MAX_MM 400
 
 
+    // ---------------------- 
+
+    enum state
+    {
+        S_INIT,
+        S_AVANZANDO,
+        S_HUECO_IZQ,
+        S_HUECO_DER,
+        S_ALGO_DELANTE
+    };
+
+    // ---------------------- PID
+    const double kP = 0.5;
+    const double kI = 0.0;
+    const double kD = 0.0;
+
+    const int velocidad_base = 100;
+
+
+
 
     
     //Direcciones memoria sensores tof
