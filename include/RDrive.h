@@ -11,7 +11,7 @@
 namespace RDRIVE
 {
 
-    const int distancia_pared = 200;
+    const int distancia_pared = 100;
     
     enum DIRECCION
     {
@@ -96,6 +96,10 @@ namespace RDRIVE
 
             //
             float getOutput(){return output;};
+
+            int getVelI(){return vel_i;};
+
+            int getVelD(){return vel_d;};
 
     };
 }

@@ -23,7 +23,7 @@ TofSensors mySensors(XSH_1, XSH_2, XSH_3);
 
 state Estado = S_INIT;
 
-RDRIVE::RDrive myRobot(&motorL, &motorR, &encoderL, &encoderR, &mySensors);
+RDRIVE::RDrive myRobot(&motorR, &motorL, &encoderL, &encoderR, &mySensors);
 
 int mydistance[3];
 
@@ -51,7 +51,7 @@ void setup(){
 
   myRobot.getPID().SetTunings(kP, kI, kD);
   myRobot.setVelBase(velocidad_base);
-  myRobot.setMode(RDRIVE::MODE::SEGUIR_PARED_DERECHA);
+  myRobot.setMode(RDRIVE::MODE::MANTENERSE_CENTRADO);
   
   
   // ---------------------- Movidas display -------------
@@ -109,21 +109,15 @@ void loop() {
 
 
   
-  display.clearDisplay();
-  display.setCursor(0,0);
-  display.setTextColor(SSD1306_WHITE);
-  display.setTextSize(1);
-  display.print(myRobot.getOutput());
-  display.display();
-
+  
   myRobot.compute(mydistance);
   myRobot.avanzarLaberinto();
 
-  mySensors.printMeasurements();
+  
 
 
   
-
+  
 
 
   
@@ -135,9 +129,9 @@ void loop() {
   //mySensors.printMeasurements();
 
   //mySensors.printMeasurements();
-  /*
+  
 
-  mySensors.printMeasurements();
+  //mySensors.printMeasurements();
 
   if(Estado == S_AVANZANDO)
   {
@@ -187,7 +181,7 @@ void loop() {
     delay(200);	
     Estado = S_AVANZANDO;
   }
-  */
+  
 
   
   

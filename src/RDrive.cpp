@@ -18,11 +18,12 @@ RDrive::RDrive(Motor* motor1, Motor* motor2, Encoder_p* encoder1, Encoder_p* enc
 
     input = 0;
     setpoint = 0;
-    output = 0;
+    //output = 0;
     kp = 0.5;
     ki = 0.0;
     kd = 0.0;
     myPID = new PID(&input, &output, &setpoint, kp, ki, kd, DIRECT);
+    myPID->SetMode(AUTOMATIC);
     myPID->SetTunings(kp, ki, kd);
     myPID->SetSampleTime(0.001);
     myPID->SetOutputLimits(-255, 255);
@@ -70,13 +71,16 @@ void RDrive::avanzarLaberinto()
     if(myModo == MANTENERSE_CENTRADO)
         input = myDistance[RIGHT] - myDistance[LEFT];
     
-    input = myDistance[RIGHT];
+    else
+        input = myDistance[RIGHT];
 
-    vel_d = vel_base - vel_i;
-    vel_i = vel_base + vel_i;
+    vel_d = vel_base + output;
+    vel_i = vel_base - output;
 
     misMotores[LEFT]->setPWM(abs(vel_i) > 255 ? 255 : abs(vel_i));
-    misMotores[RIGHT]->setPWM(abs(vel_i) > 255 ? 255 : abs(vel_i));
+    misMotores[RIGHT]->setPWM(abs(vel_d) > 255 ? 255 : abs(vel_d));
+
+
 
     if (vel_i > 0)
     {

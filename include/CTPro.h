@@ -21,13 +21,13 @@
     #define BTN_1 40
     #define BTN_2 38
     #define BTN_3 36
-    #define XSH_2 17
-    #define XSH_1 16
+    #define XSH_2 16
+    #define XSH_1 17
     #define XSH_3 15
     #define DIR_LB 14
     #define DIR_LA 10
-    #define DIR_RA 8
-    #define DIR_RB 6
+    #define DIR_RA 6
+    #define DIR_RB 8
 
 
     // OLED	
@@ -38,12 +38,12 @@
 
 
     // DISTANCIAS
-    #define DISTANCE_FRONT_MIN_MM 200
-    #define DISTANCE_FRONT_MAX_MM 400
+    #define DISTANCE_FRONT_MIN_MM 50
+    #define DISTANCE_FRONT_MAX_MM 100
     #define DISTANCE_LEFT_MIN_MM 200
-    #define DISTANCE_LEFT_MAX_MM 400
+    #define DISTANCE_LEFT_MAX_MM 200 
     #define DISTANCE_RIGHT_MIN_MM 200
-    #define DISTANCE_RIGHT_MAX_MM 400
+    #define DISTANCE_RIGHT_MAX_MM 200
 
 
     // ---------------------- 
@@ -58,11 +58,11 @@
     };
 
     // ---------------------- PID
-    const double kP = 0.5;
+    const double kP = 0.18;
     const double kI = 0.0;
-    const double kD = 0.0;
+    const double kD = 0.01;
 
-    const int velocidad_base = 100;
+    const int velocidad_base = 50;
 
 
 
