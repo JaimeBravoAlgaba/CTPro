@@ -4,7 +4,8 @@ using namespace RDRIVE;
 
 RDrive::RDrive()
 {
-    //ctor
+    
+    
 }
 
 RDrive::RDrive(Motor* motor1, Motor* motor2, Encoder_p* encoder1, Encoder_p* encoder2, TofSensors* sensors)

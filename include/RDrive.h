@@ -57,7 +57,11 @@ namespace RDRIVE
         public:
 
             RDrive();
+
+            // Constructor con parametros (Motor derecho, Motor izquierdo, Encoder derecho, Encoder izquierdo, Sensores de distancia)
             RDrive(Motor*, Motor*, Encoder_p*, Encoder_p*, TofSensors*);
+            
+            // Inicializa el pid y algunas cosas mas
             void init();
 
             //Avanza sin mas
@@ -75,6 +79,7 @@ namespace RDRIVE
                 return *myPID;
             }
 
+            //Para el robot
             void parar();
 
             //Logica
@@ -83,8 +88,11 @@ namespace RDRIVE
             //Setters
             void setVelBase(int a){vel_base = a;};
 
+
+            // Hace que el robot gire indefinidamente en la direccion indicada
             void rotar(const DIRECCION);
 
+            // Setea el modo de operacion (seguir una pared o mantenerse centrado)
             void setMode(const MODE);
 
     };

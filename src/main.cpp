@@ -29,6 +29,8 @@ int mydistance[3];
 
 
 
+
+
 // Funciones callback para las interrupciones de los encoders
 void header_encoderL()
 {
@@ -43,6 +45,8 @@ void header_encoderR()
 
 
 void setup(){
+
+  Serial.begin(9600);
 
   myRobot.getPID().SetTunings(kP, kI, kD);
   myRobot.setVelBase(velocidad_base);
@@ -86,10 +90,17 @@ void setup(){
   
   motorL.init();
   motorR.init();
+
+  
+  Estado  = S_AVANZANDO;
+
+  
 }
 
 void loop() {
   myRobot.compute(mydistance);
+
+  mySensors.printMeasurements();
 
   if(Estado == S_AVANZANDO)
   {
@@ -109,6 +120,7 @@ void loop() {
     }
     myRobot.avanzarLaberinto();
   }
+
 
   if(Estado == S_ALGO_DELANTE)
   {
@@ -138,6 +150,9 @@ void loop() {
     delay(200);	
     Estado = S_AVANZANDO;
   }
+
+
+  
   
 }
 
