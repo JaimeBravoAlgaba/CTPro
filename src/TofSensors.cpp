@@ -93,7 +93,7 @@ void TofSensors::printMeasurements()
     Serial.println("");
 }
 
-int* TofSensors::measureDistance()
+int* TofSensors::measureDistance(int* par)
 {
     int i;
     for(i = 0; i< 3; i++)
@@ -104,15 +104,18 @@ int* TofSensors::measureDistance()
         if(myMeasurements[i].RangeStatus != 4) {     
             
             distance[i] = myMeasurements[i].RangeMilliMeter;
+            par[i] = distance[i];
         } else {
             distance[i] = -1;
         }   
-    }   
+    }  
+
+
     return distance; 
 }
 
-int TofSensors::getDistance(int pos)
+void TofSensors::getDistance(int* pos)
 {
-    this->measureDistance();
-    return distance[pos];
+    this->measureDistance(pos);
+    
 }

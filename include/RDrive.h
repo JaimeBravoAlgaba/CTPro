@@ -8,7 +8,6 @@
 #include "TofSensors.h"
 #include "Encoder.h"
 
-
 namespace RDRIVE
 {
 
@@ -58,7 +57,7 @@ namespace RDRIVE
 
             RDrive();
 
-            // Constructor con parametros (Motor derecho, Motor izquierdo, Encoder derecho, Encoder izquierdo, Sensores de distancia)
+            // Constructor con parametros (Motor de la izquierda, Motor de la derecha, Encoder de la izquierda, Encoder de la derecha, Sensores de distancia)
             RDrive(Motor*, Motor*, Encoder_p*, Encoder_p*, TofSensors*);
             
             // Inicializa el pid y algunas cosas mas
@@ -94,6 +93,9 @@ namespace RDRIVE
 
             // Setea el modo de operacion (seguir una pared o mantenerse centrado)
             void setMode(const MODE);
+
+            //
+            float getOutput(){return output;};
 
     };
 }

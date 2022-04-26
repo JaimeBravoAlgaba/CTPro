@@ -46,11 +46,12 @@ void header_encoderR()
 
 void setup(){
 
+  Wire.setClock(800000);
   Serial.begin(9600);
 
   myRobot.getPID().SetTunings(kP, kI, kD);
   myRobot.setVelBase(velocidad_base);
-  myRobot.setMode(RDRIVE::MODE::MANTENERSE_CENTRADO);
+  myRobot.setMode(RDRIVE::MODE::SEGUIR_PARED_DERECHA);
   
   
   // ---------------------- Movidas display -------------
@@ -94,11 +95,47 @@ void setup(){
   
   Estado  = S_AVANZANDO;
 
+
+  display.setCursor(0,0);
+  display.setTextColor(SSD1306_WHITE);
+  display.setTextSize(1);
+  display.println("ENCENDIDO xd");
+  display.display();
+  
   
 }
 
 void loop() {
+
+
+  
+  display.clearDisplay();
+  display.setCursor(0,0);
+  display.setTextColor(SSD1306_WHITE);
+  display.setTextSize(1);
+  display.print(myRobot.getOutput());
+  display.display();
+
   myRobot.compute(mydistance);
+  myRobot.avanzarLaberinto();
+
+  mySensors.printMeasurements();
+
+
+  
+
+
+
+  
+ // Serial.println("a");
+
+
+ 
+  
+  //mySensors.printMeasurements();
+
+  //mySensors.printMeasurements();
+  /*
 
   mySensors.printMeasurements();
 
@@ -150,7 +187,7 @@ void loop() {
     delay(200);	
     Estado = S_AVANZANDO;
   }
-
+  */
 
   
   

@@ -18,7 +18,7 @@ class TofSensors
         int myXSHUTpins [3];
         VL53L0X_RangingMeasurementData_t myMeasurements[3];
         int distance[3];
-        int* measureDistance();
+        int* measureDistance(int*);
        
         
     public:
@@ -39,7 +39,7 @@ class TofSensors
         void setID(uint8_t, uint8_t, uint8_t);
         
         //Devuelve la distancia del sensor dado como parametro (FRONT, LEFT, RIGHT)
-        int getDistance(int);
+        void getDistance(int*);
 
 };
 #endif
