@@ -6,7 +6,7 @@ Encoder_p::Encoder_p(int canal_A, int canal_B, float tics_vuelta)
 {
     pin_canal_A = canal_A;
     pin_canal_B = canal_B;
-    grados_por_tic = 360.0/(tics_vuelta);
+    grados_por_tic = tics_vuelta;
     posicion_tics = 0;
     
 }

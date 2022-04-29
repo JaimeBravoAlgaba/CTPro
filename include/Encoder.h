@@ -13,7 +13,7 @@ class Encoder_p
     private:
         int pin_canal_A;
         int pin_canal_B;
-        volatile int posicion_tics;
+        int posicion_tics;
         float posicion_grados;
         float grados_por_tic;
 
