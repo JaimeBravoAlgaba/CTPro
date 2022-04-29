@@ -140,13 +140,52 @@ float RDrive::girar(float beta)
     return phi;
 }
 
+void RDrive::girar90(int dir)
+{
+    switch(dir)
+    {
+        case 0 :// LEFT
+            misMotores[LEFT]->setBack();
+            misMotores[RIGHT]->setFwd();
+            misMotores[LEFT]->setPWM(50);
+            misMotores[RIGHT]->setPWM(50);
+            delay(180);
+            break;
+            
+        case 1 :// RIGHT
+            misMotores[LEFT]->setFwd();
+            misMotores[RIGHT]->setBack();
+            misMotores[LEFT]->setPWM(50);
+            misMotores[RIGHT]->setPWM(50);
+            delay(120);
+            break;
+    }
+
+    
+    misMotores[LEFT]->setFree();
+    misMotores[RIGHT]->setFree();
+    delay(1000);
+}
+
+void RDrive::avanzaPoco()
+{
+    misMotores[LEFT]->setFwd();
+    misMotores[RIGHT]->setFwd();
+
+    misMotores[LEFT]->setPWM(VEL_MAX_ENC);
+    misMotores[RIGHT]->setPWM(VEL_MAX_ENC);
+    delay(200);
+    misMotores[LEFT]->setFree();
+    misMotores[RIGHT]->setFree();
+}
+
 void RDrive::avanzarLaberinto()
 {
     vel_i = vel_base + output;
     vel_d = vel_base - output;
 
-    misMotores[LEFT]->setPWM(abs(vel_i) > 255 ? 255 : abs(vel_i));
-    misMotores[RIGHT]->setPWM(abs(vel_d) > 255 ? 255 : abs(vel_d));
+    misMotores[LEFT]->setPWM(abs(vel_i) > 120 ? 120 : abs(vel_i));
+    misMotores[RIGHT]->setPWM(abs(vel_d) > 120 ? 120 : abs(vel_d));
 
 
 
@@ -213,29 +252,29 @@ int RDrive::checkWalls()
     {
         if(dR <= LAB_WIDTH)
         {
-            if(dF <= LAB_WIDTH)
+            if(dF <= LAB_DISTANCE_FRONT)
                 return 7;
             else
                 return 3;
         }
         else
         {
-            if(dF <= LAB_WIDTH)
+            if(dF <= LAB_DISTANCE_FRONT)
                 return 6;
             else
-                return 1;
+                return 2;
         }
     }
     
     else if(dR <= LAB_WIDTH)
     {
-            if(dF <= LAB_WIDTH)
+            if(dF <= LAB_DISTANCE_FRONT)
                 return 5;
             else
-                return 2;
+                return 1;
     }    
     
-    else if(dF <= LAB_WIDTH)
+    else if(dF <= LAB_DISTANCE_FRONT)
     {
         return 4;
     }

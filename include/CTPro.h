@@ -6,7 +6,7 @@
     #include <Arduino.h>
 
     // Dimensions
-    #define ROBOT_WIDTH 92.0
+    #define ROBOT_WIDTH 83.0
     #define ROBOT_RADIUS 30.0
 
     // I2C
@@ -27,8 +27,8 @@
     #define BTN_1 40
     #define BTN_2 38
     #define BTN_3 36
-    #define XSH_1 16
-    #define XSH_2 15
+    #define XSH_1 15
+    #define XSH_2 16
     #define XSH_3 17
     #define DIR_LB 14
     #define DIR_LA 10
@@ -44,14 +44,12 @@
 
 
     // DISTANCIAS
-    #define DISTANCE_FRONT_MIN_MM 50
-    #define DISTANCE_FRONT_MAX_MM 100
-    #define DISTANCE_LEFT_MIN_MM 200
-    #define DISTANCE_LEFT_MAX_MM 200 
-    #define DISTANCE_RIGHT_MIN_MM 200
-    #define DISTANCE_RIGHT_MAX_MM 200
+    #define LAB_DISTANCE_FRONT 60
+    #define LAB_DISTANCE_LEFT 120
+    #define LAB_DISTANCE_RIGHT 120
+    
 
-    #define LAB_WIDTH 168
+    #define LAB_WIDTH 168.0
     #define LAB_ADVANCE 20.0
 
 
@@ -76,7 +74,7 @@
     const double kI = 0.00;
     const double kD = 0.02; //0.02
 
-    const int velocidad_base = 60; //90
+    const int velocidad_base = 30; //90
    
     //Direcciones memoria sensores tof
     const uint8_t TOF_SENSOR_FRONT  = 0x30;

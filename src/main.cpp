@@ -9,9 +9,13 @@
 #include "Encoder.h"
 #include "PID_v1.h"
 #include "RDrive.h"
+#include "mojojojo.h"
 
 
-//#define __TEST__
+extern const unsigned char mojojojo [];
+
+
+//#define _PRINT_DISTANCE_
 // ---------------------- Objetos globales -------------
 
 
@@ -24,6 +28,7 @@ Motor motorR = Motor(DIR_RA, DIR_RB, PWM_R);
 TofSensors mySensors(XSH_1, XSH_2, XSH_3);
 
 state Estado = S_INIT;
+bool s_boton = false;
 
 RDRIVE::RDrive myRobot(&motorL, &motorR, &encoderL, &encoderR, &mySensors);
 
@@ -44,8 +49,10 @@ void header_encoderR()
 
 void setup(){
 
-  Wire.setClock(800000);
+  Wire.setClock(400000);
   Serial.begin(9600);
+
+  pinMode(BTN_2, INPUT);
 
   myRobot.getPID().SetTunings(kP, kI, kD);
   myRobot.setVelBase(velocidad_base);
@@ -66,7 +73,8 @@ void setup(){
   display.display();
   delay(2000); 
   display.clearDisplay();
- 
+
+  
   // ---------------------- Inicializaciones tof -------
   
   mySensors.init();
@@ -94,82 +102,117 @@ void setup(){
   Estado = S_AVANZANDO;
 
 
-  display.setCursor(0,0);
-  display.setTextColor(SSD1306_WHITE);
-  display.setTextSize(1);
-  display.println("ENCENDIDO xd");
+  
+
+
+  display.clearDisplay();
+  display.drawBitmap(
+  (display.width()  - LOGO_WIDTH ) / 2,
+  (display.height() - LOGO_HEIGHT) / 2,
+  mojojojo, LOGO_WIDTH, LOGO_HEIGHT, 1);
+  display.display();
+
+  delay(2000);
+  display.clearDisplay();
   display.display();
 } 
 
+
+//#define __TEST__
+
 void loop() {
   #ifdef __TEST__
-    //myRobot.girar(-90.0);
-    myRobot.avanzarDistancia(20.0);
-
+    myRobot.compute(mydistance);
+    Serial.println(mydistance[FRONT]);
   #else
   myRobot.compute(mydistance);
-  myRobot.avanzarLaberinto();
+  
 
   int checkWalls = myRobot.checkWalls();
 
-  display.clearDisplay();
+  /*display.clearDisplay();
   display.setCursor(0, 0);
   display.setTextColor(SSD1306_WHITE);
   display.println(checkWalls);
-  display.display();
+  display.display();*/
 
   switch(checkWalls)
   {
     case 0: // Cruce en X.
+      myRobot.avanzaPoco();
+      //myRobot.girar90(RIGHT);
       myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
-      
-      myRobot.resetEncoders(); 
-      myRobot.girar(90.0);  // Priorizamos derecha.
 
+
+      myRobot.girar(90);
+      myRobot.avanzaPoco();
+      myRobot.avanzaPoco();
       myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
       break;
-    case 1: break;
-    case 2: break;
-    case 3: break;
+    case 1:
+      myRobot.avanzar();
+      myRobot.resetEncoders(); 
+     break;
+    case 2: 
+      myRobot.avanzar();
+      myRobot.resetEncoders(); 
+      break;
+    case 3:
+      myRobot.avanzarLaberinto();
+
+     break;
     case 4: // Cruce en T. 
-      myRobot.resetEncoders();        
-      myRobot.avanzarDistancia(LAB_ADVANCE);
-
+      //myRobot.avanzaPoco();
+      delay(500);
+      myRobot.resetEncoders();  
+      //myRobot.girar90(RIGHT);
+      myRobot.girar(90);
+      myRobot.avanzaPoco();
+      myRobot.avanzaPoco();
       myRobot.resetEncoders(); 
-      myRobot.girar(90.0);  // Priorizamos derecha.
-
-      myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
       break;
 
     case 5: // Giro a derechas.
-      myRobot.resetEncoders();    
-      myRobot.avanzarDistancia(LAB_ADVANCE);
-
+      //myRobot.avanzaPoco();
+      //myRobot.girar90(RIGHT);
+      delay(500);
       myRobot.resetEncoders(); 
-      myRobot.girar(-90.0);
-      
+      myRobot.girar(90);
+      myRobot.avanzaPoco();
+      myRobot.avanzaPoco();
       myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
       break;
     case 6: // Giro a izquierdas.
+      //myRobot.avanzaPoco();
+      //myRobot.girar90(LEFT);
+      delay(500);
       myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
-
+      myRobot.girar(-90);
+      myRobot.avanzaPoco();
+      myRobot.avanzaPoco();
       myRobot.resetEncoders(); 
-      myRobot.girar(90.0);
-      
-      myRobot.resetEncoders(); 
-      myRobot.avanzarDistancia(LAB_ADVANCE);
       break;
     case 7: // Hoja
+      //myRobot.avanzaPoco();
+      delay(500);
       myRobot.resetEncoders(); 
-      myRobot.girar(180);
+      myRobot.girar(90);
+      myRobot.resetEncoders(); 
+      myRobot.girar(90);
+      myRobot.resetEncoders(); 
+      //myRobot.girar90(RIGHT);
+      //myRobot.girar90(RIGHT);
+      //myRobot.avanzaPoco();
+     // myRobot.avanzaPoco();
+
+
       break;
   }
   #endif
+
+  
+
+  
 }
 
   

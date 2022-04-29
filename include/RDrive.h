@@ -12,7 +12,7 @@ namespace RDRIVE
 {
 
     const int distancia_pared = 100;    
-    #define VEL_MAX_ENC 50
+    #define VEL_MAX_ENC 25
 
     enum DIRECCION
     {
@@ -109,6 +109,10 @@ namespace RDRIVE
             
             // Gira X grados sobre sí mismo
             float girar(float beta);
+
+            void girar90(int dir);
+
+            void avanzaPoco();
 
             void setPosition(float setpoint_l, float setpoint_r);
 
